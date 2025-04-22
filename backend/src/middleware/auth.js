@@ -1,28 +1,23 @@
-import db from "../DB/db.js";
+import jwt from "jsonwebtoken";
 
 export const protectRoute = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Unauthorized: No token" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
   try {
-    const email = req.body.email;
-
-    const query = 'SELECT * FROM users WHERE email = ? AND role = "admin"';
-    
-    db.query(query, [email], (err, results) => {
-      if (err) {
-        console.error("DB error:", err);
-        return res.status(500).json({ message: "Internal server error" });
-      }
-
-      if (results.length === 0) {
-        return res.status(403).json({ message: "Access denied. Admins only." });
-      }
-
-      next(); // user is admin and can access the route
-    });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // attaching user info to the request
+    next();
   } catch (error) {
-    console.log("Middleware error:", error);
-    res.status(500).json({ message: "Something went wrong" });
+    return res.status(401).json({ message: "Unauthorized: Invalid token" });
   }
 };
+
 
 
 export const authorizeRole = (...roles) => {

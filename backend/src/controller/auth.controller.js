@@ -36,7 +36,15 @@ export const loginUser = async (req, res) => {
       { expiresIn: "9h" }
     );
 
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+      },
+    });
     console.log("user login successfully");
   } catch (error) {
     // Handle any errors that may occur during the process

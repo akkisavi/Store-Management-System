@@ -1,13 +1,17 @@
-import * as React from 'react';
-import Checkbox from '@mui/material/Checkbox';
-function App() {
+import * as React from "react";
+import { Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/login/LoginPage.jsx";
+import EmployeeHomePage from "./pages/employeehome/EmployeeHomePage.jsx";
+import AdminHomePage from "./pages/admin/AdminHomePage.jsx";
 
+function App() {
   return (
-    <>
-      <h1 className="text-3xl text-red-600">Hello World</h1>
-    
-    </>
-  )
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/employee" element={<EmployeeHomePage />} />
+      <Route path="/admin" element={<AdminHomePage />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
