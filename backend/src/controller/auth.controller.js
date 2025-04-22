@@ -11,17 +11,15 @@ export const loginUser = async (req, res) => {
   }
 
   try {
-    // Query the database for the user with the given email
     const [users] = await db.query("SELECT * FROM users WHERE email = ?", [
       email,
     ]);
 
-    // If no user is found, return error
     if (users.length === 0) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const user = users[0]; // Get the first (and only) user from the result array
+    const user = users[0]; 
 
     // Check if the password matches the hashed password in the database
     const isMatch = await bcrypt.compare(password, user.password);
@@ -47,7 +45,6 @@ export const loginUser = async (req, res) => {
     });
     console.log("user login successfully");
   } catch (error) {
-    // Handle any errors that may occur during the process
     console.error("❌ Error logging in:", error);
     res.status(500).json({ message: "Server error" });
   }
