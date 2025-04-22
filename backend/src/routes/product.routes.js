@@ -16,7 +16,7 @@ router.post(
   addProduct
 );
 router.delete(
-  "name/:name",
+  "/name/:name",
   protectRoute,
   authorizeRole("admin", "manager"),
   deleteProductbyName

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import salesRoutes from "./routes/sales.routes.js";
 import db from "./DB/db.js";
 
-import userRoutes from "./routes/user.routes.js";
+// import userRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import productRoutes from "./routes/product.routes.js";
