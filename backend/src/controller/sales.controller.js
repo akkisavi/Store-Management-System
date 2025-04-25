@@ -6,6 +6,7 @@ export const addSale = async (req, res) => {
       const { product_id, quantity_sold } = req.body;
       const userId = req.user.id;
   
+
       // Fetch product
       const [productResult] = await db.execute('SELECT * FROM products WHERE id = ?', [product_id]);
       if (productResult.length === 0) return res.status(404).json({ message: "Product not found" });
@@ -43,7 +44,7 @@ export const addSale = async (req, res) => {
   
       // Send PDF invoice to frontend
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", `attachment; filename=invoice-${Date.now()}.pdf`);
+      res.setHeader("Content-Disposition", `inline; filename=invoice-${Date.now()}.pdf`);
       res.send(Buffer.from(invoiceBuffer, "base64"));
   
     } catch (error) {

@@ -5,7 +5,7 @@ import { protectRoute, authorizeRole } from "../middleware/auth.js";
 const router = Router();
 
 // Employee can record a sale
-router.post("/sell", protectRoute, authorizeRole("employee"), addSale);
+router.post("/sell", protectRoute, authorizeRole("employee","manager","admin"), addSale);
 
 // Admin can view profit logs
 router.get("/report", protectRoute, authorizeRole("admin"), getDailySalesReport);

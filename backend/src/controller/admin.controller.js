@@ -45,3 +45,7 @@ export const deleteEmployee = async (req, res) => {
       res.status(500).json({ message: "Something went wrong" });
     }
 };
+
+export const checkAdmin = async (req, res, next) => {
+	res.status(200).json({ admin: true });
+};

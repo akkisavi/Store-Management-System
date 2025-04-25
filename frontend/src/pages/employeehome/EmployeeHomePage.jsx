@@ -1,18 +1,53 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import Sidebar from "../../components/Sidebar.jsx";
+import AddProductForm from "../../components/AddProductForm.jsx";
+import SellProductForm from "../../components/SellProductForm.jsx";
+import { Box, Typography } from "@mui/material";
+import { getUserFromToken } from "../../utils/getUserFromToken";
+
 
 const EmployeeHomePage = () => {
+  const [selectedTab, setSelectedTab] = useState("add");
+  const [employeeName, setEmployeeName] = useState(""); 
+
+  useEffect(() => {
+    const user = getUserFromToken();
+    if (user) setEmployeeName(user.name || "Employee");
+  }, []);
+
+
+  const renderContent = () => {
+    if (selectedTab === "add") return <AddProductForm />;
+    if (selectedTab === "sell") return <SellProductForm />;
+    return <Typography>Fetching Products Soon</Typography>;
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-        <h1 className="text-2xl font-bold mb-4">Welcome Employee</h1>
-        <p className="text-gray-600 mb-4">Let’s start working!</p>
-        <div className="space-y-3">
-          <button className="w-full bg-green-500 text-white py-2 rounded">Add Product</button>
-          <button className="w-full bg-green-500 text-white py-2 rounded">Sell Product</button>
-          <button className="w-full bg-green-500 text-white py-2 rounded">Generate Bill</button>
-        </div>
-      </div>
-    </div>
+    <Box sx={{ display: "flex", height: "100vh" }}>
+      {/* Welcome bar */}
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          backgroundColor: "#1976d2",
+          color: "white",
+          padding: "16px",
+          zIndex: 1000,
+        }}
+      >
+        <Typography variant="h5" fontWeight="bold">
+          Welcome, {employeeName}
+        </Typography>
+      </Box>
+
+      {/* Sidebar */}
+      <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+
+      {/* Main content */}
+      <Box sx={{ flex: 1, mt: 8, p: 3 }}>{renderContent()}</Box>
+    </Box>
   );
 };
 

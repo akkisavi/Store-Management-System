@@ -16,20 +16,22 @@ export const loginUser = async (req, res) => {
     ]);
 
     if (users.length === 0) {
+      console.log("Invalid email");
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const user = users[0]; 
+    const user = users[0];
 
     // Check if the password matches the hashed password in the database
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      console.log("Invalid password");
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
     // Generate JWT token
     const token = jwt.sign(
-      { id: user.id, role: user.role },
+      { id: user.id, role: user.role, name: user.name },
       process.env.JWT_SECRET,
       { expiresIn: "9h" }
     );
@@ -41,6 +43,7 @@ export const loginUser = async (req, res) => {
         id: user.id,
         email: user.email,
         role: user.role,
+        name: user.name,
       },
     });
     console.log("user login successfully");
