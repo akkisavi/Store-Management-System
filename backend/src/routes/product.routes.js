@@ -15,6 +15,7 @@ router.post(
   authorizeRole("admin", "manager", "employee"),
   addProduct
 );
+
 router.delete(
   "/name/:name",
   protectRoute,
