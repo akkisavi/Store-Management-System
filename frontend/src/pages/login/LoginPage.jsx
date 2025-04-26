@@ -38,7 +38,7 @@
 
     return (
       <div className="min-h-screen bg-[#f8fd68c9] flex items-center justify-center">
-        <div className="bg-white rounded-xl shadow-xl p-10 w-full max-w-md text-center">
+        <div className="bg-white rounded-xl shadow-xl p-10 w-full max-w-md text-center border-1 border-gray-400">
           <img
             src="/logomain.svg"
             alt="Logo"

@@ -2,19 +2,27 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar.jsx";
 import AddProductForm from "../../components/AddProductForm.jsx";
 import SellProductForm from "../../components/SellProductForm.jsx";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { getUserFromToken } from "../../utils/getUserFromToken";
-
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const EmployeeHomePage = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user-info");
+    toast.success("Logged out successfully");
+    navigate("/login");
+  };
+
   const [selectedTab, setSelectedTab] = useState("add");
-  const [employeeName, setEmployeeName] = useState(""); 
+  const [employeeName, setEmployeeName] = useState("");
 
   useEffect(() => {
     const user = getUserFromToken();
     if (user) setEmployeeName(user.name || "Employee");
   }, []);
-
 
   const renderContent = () => {
     if (selectedTab === "add") return <AddProductForm />;
@@ -40,6 +48,10 @@ const EmployeeHomePage = () => {
         <Typography variant="h5" fontWeight="bold">
           Welcome, {employeeName}
         </Typography>
+
+          <Button variant="outlined" color="error" onClick={handleLogout}>
+            Logout
+          </Button> //---------------------NOte-----------------------------
       </Box>
 
       {/* Sidebar */}

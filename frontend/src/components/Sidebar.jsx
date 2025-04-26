@@ -12,13 +12,22 @@ const Sidebar = ({ selectedTab, setSelectedTab }) => {
       }}
     >
       <List>
-        <ListItemButton selected={selectedTab === "add"} onClick={() => setSelectedTab("add")}>
+        <ListItemButton
+          selected={selectedTab === "add"}
+          onClick={() => setSelectedTab("add")}
+        >
           <ListItemText primary="Add Product" />
         </ListItemButton>
-        <ListItemButton selected={selectedTab === "sell"} onClick={() => setSelectedTab("sell")}>
+        <ListItemButton
+          selected={selectedTab === "sell"}
+          onClick={() => setSelectedTab("sell")}
+        >
           <ListItemText primary="Sell Product" />
         </ListItemButton>
-        <ListItemButton selected={selectedTab === "fetch"} onClick={() => setSelectedTab("fetch")}>
+        <ListItemButton
+          selected={selectedTab === "fetch"}
+          onClick={() => setSelectedTab("fetch")}
+        >
           <ListItemText primary="Fetch Product" />
         </ListItemButton>
       </List>
