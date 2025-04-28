@@ -19,7 +19,7 @@ const SellProductForm = () => {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const response = await axiosInstance.get("/api/products/all");
+        const response = await axiosInstance.get("/api/product/all");
         setProducts(response.data);
       } catch (error) {
         console.log("Error fetching products:", error);

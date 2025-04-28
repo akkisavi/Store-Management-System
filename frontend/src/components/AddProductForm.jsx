@@ -19,7 +19,7 @@ const AddProductForm = () => {
   const handleSubmit = async () => {
     try {
       await axiosInstance.post("/api/product/add", form);
-      alert("Product added successfully");
+      toast.success("Product added successfully");
     } catch (error) {
         console.log(error);
       toast.error("Error adding product");
