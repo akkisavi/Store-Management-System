@@ -6,6 +6,8 @@ import { Box, Button, Typography } from "@mui/material";
 import { getUserFromToken } from "../../utils/getUserFromToken";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { CiLogout } from "react-icons/ci";
+import FetchProductForm from "../../components/FetchProductForm.jsx";
 
 const EmployeeHomePage = () => {
   const navigate = useNavigate();
@@ -27,11 +29,12 @@ const EmployeeHomePage = () => {
   const renderContent = () => {
     if (selectedTab === "add") return <AddProductForm />;
     if (selectedTab === "sell") return <SellProductForm />;
+    if (selectedTab === "fetch") return <FetchProductForm />;
     return <Typography>Fetching Products Soon</Typography>;
   };
 
   return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
+    <Box sx={{ display: "flex", height: "100vh", bgcolor: "#ffff99"}}>
       {/* Welcome bar */}
       <Box
         sx={{
@@ -39,19 +42,22 @@ const EmployeeHomePage = () => {
           top: 0,
           left: 0,
           width: "100%",
-          backgroundColor: "#1976d2",
+          bgcolor: "#ffcc00",
           color: "white",
           padding: "16px",
           zIndex: 1000,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Typography variant="h5" fontWeight="bold">
           Welcome, {employeeName}
         </Typography>
 
-          <Button variant="outlined" color="error" onClick={handleLogout}>
-            Logout
-          </Button> //---------------------NOte-----------------------------
+        <Button variant="contained" color="error" onClick={handleLogout}>
+          <CiLogout className="text-xl"/> Logout
+        </Button>
       </Box>
 
       {/* Sidebar */}

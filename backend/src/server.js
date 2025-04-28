@@ -25,7 +25,7 @@ app.use(
 // app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api/products", productRoutes);
+app.use("/api/product", productRoutes);
 app.use("/api/sales", salesRoutes);
 
 app.listen(port, () => {
