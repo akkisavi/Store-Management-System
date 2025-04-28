@@ -1,7 +1,12 @@
 import { Router } from "express";
 import { authorizeRole, protectRoute } from "../middleware/auth.js";
 
-import { getProductByName, getAllProducts, addProduct, deleteProductbyName } from "../controller/product.controller.js";
+import {
+  getProductByName,
+  getAllProducts,
+  addProduct,
+  deleteProductbyName,
+} from "../controller/product.controller.js";
 
 const router = Router();
 
@@ -15,6 +20,13 @@ router.post(
   authorizeRole("admin", "manager", "employee"),
   addProduct
 );
+
+// router.put(
+//   "/update/:id",
+//   protectRoute,
+//   authorizeRole("admin", "manager", "employee"),
+//   updateProduct
+// );
 
 router.delete(
   "/name/:name",

@@ -34,7 +34,7 @@ const EmployeeHomePage = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", bgcolor: "#ffff99"}}>
+    <Box sx={{ display: "flex", height: "100vh", bgcolor: "#ffff99" }}>
       {/* Welcome bar */}
       <Box
         sx={{
@@ -56,7 +56,7 @@ const EmployeeHomePage = () => {
         </Typography>
 
         <Button variant="contained" color="error" onClick={handleLogout}>
-          <CiLogout className="text-xl"/> Logout
+          <CiLogout className="text-xl" /> Logout
         </Button>
       </Box>
 
@@ -64,7 +64,22 @@ const EmployeeHomePage = () => {
       <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
 
       {/* Main content */}
-      <Box sx={{ flex: 1, mt: 8, p: 3 }}>{renderContent()}</Box>
+      <Box
+        sx={{
+          flex: 1,
+          mt: 8,  
+          p: 3,
+          overflowY: "scroll",
+          height: "calc(100vh - 56px)",
+          "::-webkit-scrollbar": {
+            display: "none", 
+          },
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+        }}
+      >
+        {renderContent()}
+      </Box>
     </Box>
   );
 };
