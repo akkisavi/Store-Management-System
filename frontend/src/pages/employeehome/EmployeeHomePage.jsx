@@ -30,7 +30,6 @@ const EmployeeHomePage = () => {
     if (selectedTab === "add") return <AddProductForm />;
     if (selectedTab === "sell") return <SellProductForm />;
     if (selectedTab === "fetch") return <FetchProductForm />;
-    return <Typography>Fetching Products Soon</Typography>;
   };
 
   return (
