@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import salesRoutes from "./routes/sales.routes.js";
 import cors from "cors";
 
-// import userRoutes from "./routes/user.routes.js";
+
 import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import productRoutes from "./routes/product.routes.js";
@@ -22,7 +22,6 @@ app.use(
   })
 );
 
-// app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/product", productRoutes);
