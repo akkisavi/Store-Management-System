@@ -60,16 +60,16 @@ export const deleteEmployee = async (req, res) => {
 
 export const updateEmployee = async (req, res) => {
   const { id } = req.params;
-  const { name, role } = req.body;
+  const { name, email, role } = req.body;
 
-  if (!name || !role) {
+  if (!name || !role || !email) {
     return res.status(400).json({ message: "Name and role are required" });
   }
 
   try {
     const result = await db.query(
-      "UPDATE employees SET name = ?, role = ? WHERE id = ?",
-      [name, role, id]
+      "UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?",
+      [name, email, role, id]
     );
 
     if (result.affectedRows === 0) {
@@ -103,21 +103,20 @@ export const getDailySalesReport = async (req, res) => {
   }
 };
 
-
 export const getProductDetailsForDate = async (date) => {
   try {
     console.log("Received date:", date);
 
-    if (!date || typeof date !== 'string') {
-      throw new Error('Invalid or missing date');
+    if (!date || typeof date !== "string") {
+      throw new Error("Invalid or missing date");
     }
 
     const validDate = new Date(date);
     if (isNaN(validDate)) {
-      throw new Error('Invalid date format');
+      throw new Error("Invalid date format");
     }
 
-    const formattedDate = validDate.toISOString().split('T')[0];
+    const formattedDate = validDate.toISOString().split("T")[0];
 
     const [rows] = await db.execute(
       `SELECT 
@@ -133,7 +132,7 @@ export const getProductDetailsForDate = async (date) => {
     );
 
     if (rows.length === 0) {
-      throw new Error('No sales data found for this date');
+      throw new Error("No sales data found for this date");
     }
 
     return rows;
@@ -142,8 +141,6 @@ export const getProductDetailsForDate = async (date) => {
     throw error;
   }
 };
-
-  
 
 // Check Admin - Middleware for Admin Routes
 export const checkAdmin = async (req, res, next) => {

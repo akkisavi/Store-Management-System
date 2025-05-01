@@ -21,7 +21,7 @@ import { Delete, Edit, Save, Cancel } from "@mui/icons-material";
 const DeleteEmployee = () => {
   const [employees, setEmployees] = useState([]);
   const [editRowId, setEditRowId] = useState(null);
-  const [editData, setEditData] = useState({ name: "", role: "" });
+  const [editData, setEditData] = useState({ name: "",email: "", role: "" });
 
   useEffect(() => {
     fetchEmployees();
@@ -50,7 +50,7 @@ const DeleteEmployee = () => {
 
   const handleEditClick = (employee) => {
     setEditRowId(employee.id);
-    setEditData({ name: employee.name, role: employee.role });
+    setEditData({ name: employee.name,email: employee.email, role: employee.role });
   };
 
   const handleSave = async (id) => {
@@ -77,6 +77,7 @@ const DeleteEmployee = () => {
             >
               <TableCell sx={{ fontWeight: "bold" }}>Employee ID</TableCell>
               <TableCell sx={{ fontWeight: "bold" }}>Employee Name</TableCell>
+              <TableCell sx={{ fontWeight: "bold" }}>Email</TableCell>
               <TableCell sx={{ fontWeight: "bold" }}>Role</TableCell>
               <TableCell sx={{ fontWeight: "bold" }}>Last Activity</TableCell>
               <TableCell sx={{ fontWeight: "bold" }} align="right">
@@ -99,6 +100,19 @@ const DeleteEmployee = () => {
                     />
                   ) : (
                     emp.name
+                  )}
+                </TableCell>
+                <TableCell>
+                  {editRowId === emp.id ? (
+                    <TextField
+                      value={editData.email}
+                      onChange={(e) =>
+                        setEditData({ ...editData, email: e.target.value })
+                      }
+                      size="small"  
+                    />
+                  ) : (
+                    emp.email
                   )}
                 </TableCell>
                 <TableCell>
