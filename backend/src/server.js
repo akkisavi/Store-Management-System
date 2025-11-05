@@ -19,12 +19,13 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 
-app.use(cors({
-  origin: ["https://store-management-system-gufl.onrender.com"], 
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-}));
-
+app.use(
+  cors({
+    origin: ["https://store-management-system-gufl.onrender.com"], // your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
@@ -37,7 +38,6 @@ app.use(express.static(frontendPath));
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
-
 
 app.listen(port, () => {
   console.log(`✅ Server is running on port ${port}`);
