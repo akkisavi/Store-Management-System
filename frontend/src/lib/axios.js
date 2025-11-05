@@ -1,8 +1,7 @@
-// src/services/axiosInstance.js
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://store-management-system-api.onrender.com",
 });
 
 // Attaching the token to the request headers automatically

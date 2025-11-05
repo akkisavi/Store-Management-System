@@ -19,12 +19,12 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: ["https://store-management-system-gufl.onrender.com"], 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
