@@ -26,7 +26,7 @@ const AddEmployee = () => {
   const handleAddEmployee = async () => {
     try {
       const response = await axiosInstance.post(
-        "/api/admin/add-employee",
+        "/admin/add-employee",
         newEmployee
       );
       toast.success(response.data.message);

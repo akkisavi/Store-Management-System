@@ -19,7 +19,7 @@ const SellProductForm = () => {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const response = await axiosInstance.get("/api/product/all");
+        const response = await axiosInstance.get("/product/all");
         setProducts(response.data);
       } catch (error) {
         console.log("Error fetching products:", error);
@@ -37,7 +37,7 @@ const SellProductForm = () => {
   const handleSell = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/api/sales/sell", form, {
+      const response = await axiosInstance.post("/sales/sell", form, {
         responseType: "blob",
       });
 

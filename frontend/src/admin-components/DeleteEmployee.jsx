@@ -29,7 +29,7 @@ const DeleteEmployee = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axiosInstance.get("/api/admin/allEmployees");
+      const response = await axiosInstance.get("/admin/allEmployees");
       setEmployees(response.data);
     } catch (error) {
       toast.error("Failed to fetch employees");
@@ -39,7 +39,7 @@ const DeleteEmployee = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axiosInstance.delete(`/api/admin/employee/${id}`);
+      await axiosInstance.delete(`/admin/employee/${id}`);
       toast.success("Employee deleted");
       fetchEmployees();
     } catch (error) {
@@ -55,7 +55,7 @@ const DeleteEmployee = () => {
 
   const handleSave = async (id) => {
     try {
-      await axiosInstance.put(`/api/admin/update-employee/${id}`, editData);
+      await axiosInstance.put(`/admin/update-employee/${id}`, editData);
       toast.success("Employee updated");
       setEditRowId(null);
       fetchEmployees();

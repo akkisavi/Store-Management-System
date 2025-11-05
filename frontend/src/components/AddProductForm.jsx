@@ -17,7 +17,7 @@ const AddProductForm = () => {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const response = await axiosInstance.get("/api/product/all");
+        const response = await axiosInstance.get("/product/all");
         setProducts(response.data);
       } catch (error) {
         console.log("Error fetching products:", error);
@@ -44,7 +44,7 @@ const AddProductForm = () => {
       };
 
       try {
-        await axiosInstance.post("/api/product/add", updatedProduct);
+        await axiosInstance.post("/product/add", updatedProduct);
         toast.success("Product quantity updated successfully");
       } catch (error) {
         console.log(error);
@@ -52,7 +52,7 @@ const AddProductForm = () => {
       }
     } else {
       try {
-        await axiosInstance.post("/api/product/add", form);
+        await axiosInstance.post("/product/add", form);
         toast.success("Product added successfully");
       } catch (error) {
         console.log(error);

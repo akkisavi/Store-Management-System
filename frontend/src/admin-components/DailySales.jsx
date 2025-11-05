@@ -30,7 +30,7 @@ const DailySales = () => {
 
   const fetchSalesData = async () => {
     try {
-      const response = await axiosInstance.get("/api/admin/daily-sales");
+      const response = await axiosInstance.get("/admin/daily-sales");
       setSalesData(response.data);
     } catch (error) {
       toast.error("Failed to fetch sales data");
@@ -45,7 +45,7 @@ const DailySales = () => {
 
     try {
       const response = await axiosInstance.get(
-        `/api/admin/daily-sales/${formattedDate}/details`
+        `/admin/daily-sales/${formattedDate}/details`
       );
       setDetails((prev) => ({ ...prev, [formattedDate]: response.data }));
     } catch (error) {

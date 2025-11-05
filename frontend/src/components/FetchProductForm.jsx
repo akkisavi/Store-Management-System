@@ -10,7 +10,7 @@ const FetchProductForm = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axiosInstance.get("/api/product/all");
+        const response = await axiosInstance.get("/product/all");
         setProducts(response.data);
       } catch (error) {
         console.log("Error fetching products:", error);
