@@ -22,10 +22,12 @@ app.use(express.json());
 app.use(
   cors({
     origin: ["https://store-management-system-gufl.onrender.com"], // your frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+app.options("*", cors());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
