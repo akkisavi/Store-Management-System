@@ -43,8 +43,6 @@ export const allEmployees = async (req, res) => {
   }
 };
 
-// Delete Employee
-
 export const deleteEmployee = async (req, res) => {
   try {
     const { id } = req.params;

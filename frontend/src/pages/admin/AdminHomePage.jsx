@@ -30,7 +30,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", bgcolor: "#ffff99" }}>
+    <Box sx={{ display: "flex", height: "100vh", bgcolor: "#f4f5f7" }}>
       {/* Welcome bar */}
       <Box
         sx={{
@@ -38,13 +38,14 @@ const AdminDashboard = () => {
           top: 0,
           left: 0,
           width: "100%",
-          bgcolor: "#ffcc00",
-          color: "white",
+          bgcolor: "white",
+          color: "#0052cc",
           padding: "16px",
           zIndex: 1000,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          borderBottom: "1px solid #e0e0e0",
         }}
       >
         <Typography variant="h5" fontWeight="bold">
