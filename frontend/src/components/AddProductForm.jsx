@@ -2,7 +2,7 @@ import { Box, Button, TextField, Card, CardContent, Typography } from "@mui/mate
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../lib/axios";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import toast from "react-hot-toast"; // For toast notifications
+import toast from "react-hot-toast"; 
 
 const AddProductForm = () => {
   const [form, setForm] = useState({
@@ -62,7 +62,7 @@ const AddProductForm = () => {
   };
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh" bgcolor={"#ffff99"}>
+    <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh" bgcolor={"#f4f5f7"}>
       <Card sx={{ width: 400, padding: 3, boxShadow: 4, borderRadius: 4 }}>
         <CardContent>
           <Typography variant="h5" fontWeight="bold" textAlign="center" mb={3} gutterBottom>

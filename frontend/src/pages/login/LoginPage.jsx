@@ -7,6 +7,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,8 +73,10 @@ const LoginPage = () => {
           <button
             type="submit"
             className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-3 rounded-md transition duration-300"
+            disabled={loading}
           >
-            Sign in
+          
+            {loading ? "Signing in..." : "Sign in"}
           </button>
         </form>
       </div>

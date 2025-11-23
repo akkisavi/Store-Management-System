@@ -1,17 +1,15 @@
-import { Typography, Box, Button } from '@mui/material';
-import Sidebar from '../../admin-components/Sidebar';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import AddEmployee from '../../admin-components/AddEmployee';
-import DeleteEmployee from '../../admin-components/DeleteEmployee';
-import FetchProductForm from '../../components/FetchProductForm';
-import DailySales from '../../admin-components/DailySales';
-import { useState } from 'react';
-import { CiLogout } from 'react-icons/ci';
-
+import { Typography, Box, Button } from "@mui/material";
+import Sidebar from "../../admin-components/Sidebar";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import AddEmployee from "../../admin-components/AddEmployee";
+import DeleteEmployee from "../../admin-components/DeleteEmployee";
+import FetchProductForm from "../../components/FetchProductForm";
+import DailySales from "../../admin-components/DailySales";
+import { useState } from "react";
+import { CiLogout } from "react-icons/ci";
 
 const AdminDashboard = () => {
-
   const navigate = useNavigate();
 
   const [selectedTab, setSelectedTab] = useState("add");
@@ -19,7 +17,7 @@ const AdminDashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("user-info");
     toast.success("Logged out successfully");
-    navigate("/login");
+    navigate("/");
   };
 
   const renderContent = () => {
@@ -64,12 +62,12 @@ const AdminDashboard = () => {
       <Box
         sx={{
           flex: 1,
-          mt: 8,  
+          mt: 8,
           p: 3,
           overflowY: "scroll",
           height: "calc(100vh - 56px)",
           "::-webkit-scrollbar": {
-            display: "none", 
+            display: "none",
           },
           "-ms-overflow-style": "none",
           "scrollbar-width": "none",
