@@ -15,7 +15,7 @@ const EmployeeHomePage = () => {
   const handleLogout = () => {
     localStorage.removeItem("user-info");
     toast.success("Logged out successfully");
-    navigate("/login");
+    navigate("/");
   };
 
   const [selectedTab, setSelectedTab] = useState("add");
