@@ -18,7 +18,7 @@ const LoginPage = () => {
         password,
       });
 
-      console.log(response);
+      // console.log(response);
 
       if (response && response.status === 200 && response.data) {
         const { token, user } = response.data;
@@ -75,7 +75,6 @@ const LoginPage = () => {
             className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-3 rounded-md transition duration-300"
             disabled={loading}
           >
-          
             {loading ? "Signing in..." : "Sign in"}
           </button>
         </form>

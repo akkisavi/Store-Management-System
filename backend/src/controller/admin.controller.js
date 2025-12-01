@@ -1,7 +1,6 @@
 import db from "../DB/db.js";
 import bcrypt from "bcrypt";
 
-// Add Employee
 export const addEmployee = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -26,9 +25,9 @@ export const addEmployee = async (req, res) => {
       [name, email, hashedPassword, role]
     );
 
-    res.status(201).json({ message: "✅ Employee added successfully" });
+    res.status(201).json({ message: "Employee added successfully" });
   } catch (error) {
-    console.error("❌ Error adding employee:", error);
+    console.error("Error adding employee:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -38,7 +37,7 @@ export const allEmployees = async (req, res) => {
     const [rows] = await db.execute("SELECT * FROM users");
     res.status(200).json(rows);
   } catch (error) {
-    console.error("❌ Error fetching employees:", error);
+    console.error("Error fetching employees:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -49,9 +48,9 @@ export const deleteEmployee = async (req, res) => {
 
     await db.execute(`DELETE FROM users WHERE id = ?`, [id]);
 
-    res.status(200).json({ message: "✅ Employee deleted successfully" });
+    res.status(200).json({ message: "Employee deleted successfully" });
   } catch (error) {
-    console.error("❌ Error deleting employee:", error);
+    console.error("Error deleting employee:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -96,14 +95,14 @@ export const getDailySalesReport = async (req, res) => {
 
     res.status(200).json(rows);
   } catch (error) {
-    console.error("❌ Error fetching daily sales report:", error);
+    console.error("Error fetching daily sales report:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
 
 export const getProductDetailsForDate = async (date) => {
   try {
-    console.log("Received date:", date);
+    // console.log("Received date:", date);
 
     if (!date || typeof date !== "string") {
       throw new Error("Invalid or missing date");
@@ -140,15 +139,16 @@ export const getProductDetailsForDate = async (date) => {
   }
 };
 
-// Check Admin - Middleware for Admin Routes
 export const checkAdmin = async (req, res, next) => {
   try {
+    // console.log("User info in checkAdmin:", req.user);
     if (req.user.role !== "admin") {
       return res.status(403).json({ message: "Forbidden" });
     }
     next();
+    return res.json({ isAdmin: req.user?.role === "admin" });
   } catch (error) {
-    console.error("❌ Error checking admin:", error);
+    console.error("Error checking admin:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

@@ -1,5 +1,4 @@
 import { Router } from "express";
-import expressAsyncHandler from "express-async-handler";
 import {
   addEmployee,
   allEmployees,
@@ -13,28 +12,26 @@ import { protectRoute, authorizeRole } from "../middleware/auth.js";
 
 const router = Router();
 
-router.use(protectRoute);
-router.get("/check", authorizeRole("admin"), expressAsyncHandler(checkAdmin));
+router.get("/check", protectRoute, checkAdmin);
 
+router.use(protectRoute);
 router.use(authorizeRole("admin"));
 
-router.post("/employees", expressAsyncHandler(addEmployee));
+// Employee routes (only accessible by admin)
+router.post("/add-employee", protectRoute, authorizeRole("admin"), addEmployee);
+router.delete("/employee/:id", protectRoute, authorizeRole("admin"), deleteEmployee);
+router.get("/allEmployees", protectRoute, authorizeRole("admin"), allEmployees);
+router.put("/update-employee/:id", protectRoute, authorizeRole("admin"), updateEmployee);
 
-router.get("/employees", expressAsyncHandler(allEmployees));
-
-router.put("/employees/:id", expressAsyncHandler(updateEmployee));
-
-router.delete("/employees/:id", expressAsyncHandler(deleteEmployee));
-
-router.get("/daily-sales", expressAsyncHandler(getDailySalesReport));
-
-router.get(
-  "/daily-sales/:date/details",
-  expressAsyncHandler(async (req, res) => {
+router.get("/daily-sales", getDailySalesReport);
+router.get("/daily-sales/:date/details", async (req, res) => {
+  try {
     const { date } = req.params;
     const data = await getProductDetailsForDate(date);
     res.json(data);
-  })
-);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 export default router;

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { useAuthStore } from "./auth/useAuthStore"; 
+import { Navigate } from "react-router-dom";
+import { useAuthStore } from "./auth/useAuthStore";
 import toast from "react-hot-toast";
 
 export default function ProtectedRoute({ children }) {
   const { isAdmin, isLoading, error, checkAdminStatus } = useAuthStore();
   const [checked, setChecked] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     let mounted = true;
@@ -17,8 +16,16 @@ export default function ProtectedRoute({ children }) {
         if (mounted) setChecked(true);
       }
     })();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [checkAdminStatus]);
+
+  useEffect(() => {
+    if (checked && error) {
+      toast.error(`Access denied: ${error}`);
+    }
+  }, [checked, error]);
 
   if (!checked || isLoading) {
     return (
@@ -28,13 +35,8 @@ export default function ProtectedRoute({ children }) {
     );
   }
 
-  if (error) {
-    return <Navigate to="/" state={{ from: location }} replace />;
-  }
-
   if (!isAdmin) {
-    toast.error("Access denied: Admins only");
-    return <Navigate to="/employee" />;
+    return <Navigate to="/employee" replace />;
   }
 
   return children;

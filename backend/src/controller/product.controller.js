@@ -29,7 +29,7 @@ export const addProduct = async (req, res) => {
       ]);
 
       res.status(200).json({
-        message: "✅ Product quantity updated successfully",
+        message: "Product quantity updated successfully",
       });
     } else {
       // Insert new product if it doesn't exist
@@ -45,12 +45,12 @@ export const addProduct = async (req, res) => {
       ]);
 
       res.status(201).json({
-        message: "✅ Product added successfully",
+        message: "Product added successfully",
         productId: result.insertId,
       });
     }
   } catch (error) {
-    console.error("❌ Error adding or updating product:", error);
+    console.error("Error adding or updating product:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -60,7 +60,7 @@ export const getAllProducts = async (req, res) => {
     const [rows] = await db.execute("SELECT * FROM products");
     res.status(200).json(rows);
   } catch (error) {
-    console.error("❌ Error fetching products:", error);
+    console.error("Error fetching products:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -79,7 +79,7 @@ export const getProductByName = async (req, res) => {
 
     res.status(200).json(rows[0]);
   } catch (error) {
-    console.error("❌ Error fetching product:", error);
+    console.error("Error fetching product:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -96,9 +96,9 @@ export const deleteProductbyName = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    res.status(200).json({ message: "✅ Product deleted successfully" });
+    res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
-    console.error("❌ Error deleting product:", error);
+    console.error("Error deleting product:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -136,9 +136,9 @@ export const sellProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    res.status(200).json({ message: "✅ Product sold successfully" });
+    res.status(200).json({ message: "Product sold successfully" });
   } catch (error) {
-    console.error("❌ Error selling product:", error);
+    console.error("Error selling product:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

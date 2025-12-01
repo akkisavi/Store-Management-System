@@ -6,9 +6,12 @@ export const getUserFromToken = () => {
     if (!token) return null;
 
     const decoded = jwtDecode(token);
-    return decoded; // contains id, name, role, etc.
+    if (decoded?.exp && Date.now() >= decoded.exp * 1000) {
+      return null;
+    }
+    return decoded;
   } catch (error) {
-    console.error(error, "Invalid token");
+    console.error("Invalid token:", error);
     return null;
   }
 };
