@@ -21,14 +21,12 @@ export const loginUser = async (req, res) => {
 
     const user = users[0];
 
-    // Check if the password matches the hashed password in the database
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       console.log("Invalid password");
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // Generate JWT token
     const token = jwt.sign(
       { id: user.id, role: user.role, name: user.name },
       process.env.JWT_SECRET,
