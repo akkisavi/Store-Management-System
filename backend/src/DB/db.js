@@ -10,6 +10,7 @@ const db = await mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   port: 3306,
+  connectionLimit: 10,
 });
 
 db.connect((err) => {
