@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "./../../lib/axios";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -20,25 +20,32 @@ const LoginPage = () => {
         password,
       });
 
-      // console.log(response);
-      if (response && response.status === 400) {
-        toast.error("Invalid credentials");
-        return;
-      }
-      if (response && response.status === 200 && response.data) {
-        const { token, user } = response.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+      // success (2xx)
+      const { token, user } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
 
-        if (user.role === "admin") {
-          navigate("/admin");
-        } else {
-          navigate("/employee");
-        }
-        toast.success("Login successful");
-      }
+      if (user.role === "admin") navigate("/admin");
+      else navigate("/employee");
+
+      toast.success("Login successful");
     } catch (error) {
-      console.error(error);
+      if (error?.response) {
+        const status = error.response.status;
+        const data = error.response.data;
+        console.log("Server returned:", status, data);
+
+        if (status === 400) {
+          toast.error(data?.message || "Invalid credentials");
+        } else if (status === 401) {
+          toast.error(data?.message || "Unauthorized");
+        } else {
+          toast.error(data?.message || "Server error");
+        }
+      } else {
+        console.error("Request error:", error);
+        toast.error("Network error - please try again");
+      }
     }
   };
 
