@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "./../../lib/axios";
+import { toast } from 'react-hot-toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -19,7 +21,10 @@ const LoginPage = () => {
       });
 
       // console.log(response);
-
+      if (response && response.status === 400) {
+        toast.error("Invalid credentials");
+        return;
+      }
       if (response && response.status === 200 && response.data) {
         const { token, user } = response.data;
         localStorage.setItem("token", token);
@@ -30,6 +35,7 @@ const LoginPage = () => {
         } else {
           navigate("/employee");
         }
+        toast.success("Login successful");
       }
     } catch (error) {
       console.error(error);
